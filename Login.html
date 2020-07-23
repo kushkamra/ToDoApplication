@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="Login.js" ></script>
+    <title>To Do Application</title>
+</head>
+<body>
+    
+    <div id="login">
+        <h3 class="text-center text-white pt-5">Login form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="loginform" class="form" action="Index.html" onsubmit="return userLogin();" method="post">
+                            <h3 class="text-center text-info">Login</h3>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Email:</label><br>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter email" >
+                                <div id="usernamemsg" class="invalid-feedback">Please enter email</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" >
+                                <div id="passwordmsg" class="invalid-feedback">Please enter password</div>
+                            </div>
+                            <div class="form-group">
+                                
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="Registration.html" class="text-info">Register here</a>
+                            </div>
+                            <div id="loginErrorMsg" class="alert alert-danger alert-dismissible fade show" style="display:none;" >
+                                <strong>Error!</strong> Login was unsuccessful, please check your username and password! . 
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="Profile.js"></script>
+    <title>To Do Application</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Registration form</h2>
+        <form id="profileForm" class="form" action="Index.html" onsubmit="return updateUserData();" method="post">
+            <div class="form-group">
+                <label for="email">Username/Email:</label>
+                <input type="email" class="form-control" id="email" readonly placeholder="Enter email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="lastName">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label> 
+                <select  name="gender" id="gender" class="form-control">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="profileImage">Upload Profile Image:</label>
+                <input type="file" class="form-control-file"  id="profileImage"  accept="image/*" onchange="loadImage()" />
+                <img style="height: 50%;width: 50%;" id="output" />
+            </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      
+</body>
+</html>
