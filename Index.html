@@ -34,7 +34,7 @@
               <h1>Welcome in Todo List Application</h1>
               <div class="todo-inner">
                 <div class="form-row">
-                  <div class="col-8 mr-sm-2">
+                  <div class="col-md-6">
                     <input type="text" class="form-control" placeholder="Enter your task" id="addtaskinput" />
                     
                     <div id="tasknameError" class="invalid-feedback" >
@@ -43,23 +43,28 @@
                     
                     <input type="hidden" id="saveindex">
                   </div>
-
-                  <button type="button" class="btn btn-success mr-sm-2" id="addtaskbtn">
-                    Add Task
-                  </button>
-                  <button type="button" class="btn btn-success mr-sm-2" id="savetaskbtn" style="display: none;">
-                    Save Task
-                  </button>
-                  <button type="button" id="deleteallbtn" data-confirm="Are you sure you want to delete all selected?" class="btn btn-danger">
-                    Delete All
-                  </button>
+                   <div class="col-md-6"> 
+                    <button type="button" class="btn btn-success mr-sm-2" id="addtaskbtn">
+                      Add Task
+                    </button>
+                    <button type="button" class="btn btn-success mr-sm-2" id="savetaskbtn" style="display: none;">
+                      Save Task
+                    </button>
+                    <button type="button" id="deleteallbtn" data-confirm="Are you sure you want to delete all selected?" class="btn btn-danger">
+                      Delete All
+                    </button> 
+                    <button type="button" id="deletedSelectedbtn" data-confirm="Are you sure you want to delete all selected?" class="btn btn-danger">
+                      Delete Seleted
+                    </button>
+                   </div>
+                  
                 </div>
 
                 
                 
                   <div class="form-row" style="margin-top: 10px;"> 
                     <div class="col-5 mr-sm-2"> 
-                      <input type="date" class="form-control" min="0" placeholder="select date" id="addtaskdateinput"/> 
+                      <input type="date" class="form-control" min="0" onchange="checkTaskDate()" placeholder="select date" id="addtaskdateinput"/> 
                       <div id="taskDateError" class="invalid-feedback" >
                         Please select task date.
                      </div>
@@ -105,7 +110,7 @@
             </div>
             <div class="col-sm-12 col-md-2">
               <h1>Search By</h1>
-                <div class="todo-inner">
+                <div class="todo-inner" style="padding: 10px;">
                   <div class="form-row">
                     <div class="col-md-12">
                       <form >
@@ -115,12 +120,12 @@
                     </div>
                     <div class="col-md-12">
                       <h5><b>Category:</b></h5>
-                      <input type="radio" id="office" name="category" value="office">
-                      <label for="male">Office</label><br>
-                      <input type="radio" id="home" name="category" value="home">
-                      <label for="female">Home</label><br>
-                      <input type="radio" id="personal" name="category" value="personal">
-                      <label for="other">Personal</label>
+                      <input type="checkbox" id="office" name="category" value="office">
+                      <label for="office">Office</label><br>
+                      <input type="checkbox" id="home" name="category" value="home">
+                      <label for="home">Home</label><br>
+                      <input type="checkbox" id="personal" name="category" value="personal">
+                      <label for="personal">Personal</label>
                      </div>
                      <div class="col-md-12">
                       <h5> <b>Status:</b></h5>

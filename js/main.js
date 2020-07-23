@@ -3,6 +3,7 @@ let addtaskinput = document.getElementById("addtaskinput");
 let addtaskbtn = document.getElementById("addtaskbtn");
 let addtaskdateinput =  document.getElementById("addtaskdateinput");
 let addtaskReminderDateInput = document.getElementById("addtaskReminderDateInput");
+let IsError =  false;
 addtaskbtn.addEventListener("click", function(){
     debugger;
     addtaskinputval = addtaskinput.value;
@@ -120,6 +121,18 @@ function validateTaskInput() {
         document.getElementById("taskDateError").style.display= "none"; 
     }
 
+    var selectedText = addtaskdateinputval 
+    var selectedDate = new Date(selectedText);
+    var now = new Date();
+    if (selectedDate < now) {
+        document.getElementById("taskDateError").style.display= "block"; 
+        document.getElementById("taskDateError").innerText = "Selected task date should not be Past Date"
+        result = false; 
+    }
+    else
+    {
+        document.getElementById("taskDateError").style.display= "none"; 
+    }
 
 
       return result;
@@ -163,9 +176,10 @@ function showtask(){
             taskcompleteStatustext =`<td style="color:red;font-weight: bold;">Pending</td>`
         }
         html += `<tr>
+                    <td><input type="checkbox" value="${index}" name="task_checkbox" id="chkTask"/></td>
                     <td scope="row">${index+1}</td>
                     ${taskCompleteValue}
-                    <td>${taskcompleteStatustext}</td>
+                    ${taskcompleteStatustext}
                     <td>${item.task_date}</td>
                     <td>${item.task_cat}</td>
                     <td><button type="button" style="cursor:pointer;" onclick="edittask(${index})" class="text-primary"><i class="fa fa-edit"></i>Edit</button></td>
@@ -283,7 +297,6 @@ savetaskbtn.addEventListener("click", function(){
                 taskObj[saveindex].task_reminder_date = '';
             }
             
-           
             taskObj[saveindex].task_isPublic =  addtaskIspublicval;
         }
       }
@@ -365,7 +378,43 @@ function deleteitem(index){
     } 
 }
 
+// Delete Selected items
+let deleteSelected =  document.getElementById("deletedSelectedbtn");
+deleteSelected.addEventListener("click",function(){
+    event.preventDefault(); 
+    debugger;
+    var choice = confirm(this.getAttribute('data-confirm')); 
+    if(choice) 
+    {
+       
+        var grid = document.getElementById("addedtasklist");
+        //Reference the CheckBoxes in Table.
+        var checkBoxes = grid.getElementsByTagName("INPUT");
+        //Loop through the CheckBoxes.
+        let users = JSON.parse(localStorage.getItem("users")); 
+        let webtask = users.find( a => a.email == (JSON.parse(sessionStorage.getItem("userdata")).email)).toDoList
+        var  userIndex =  users.findIndex(a => a.email == (JSON.parse(sessionStorage.getItem("userdata")).email));
 
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                //console.log("Index Id : - " + checkBoxes[i].value);
+                webtask.splice(checkBoxes[i].value, 1);
+            }
+        }
+
+        for (keys in users[userIndex]) {
+            if(keys == 'toDoList'){
+                users[userIndex].toDoList = webtask;
+            }
+        } 
+       // console.log(users);  
+        localStorage.setItem("users", JSON.stringify(users));
+        showtask();
+ 
+      
+     
+    }
+});
 
 // deleteall
 let deleteallbtn = document.getElementById("deleteallbtn");
@@ -391,19 +440,15 @@ deleteallbtn.addEventListener("click", function(){
         addtaskbtn.style.display="block";
         localStorage.setItem("users", JSON.stringify(users));
         showtask();
-       
-      }
-
-   
+      }   
 })
 
-
-//searchlist
+//Search by name
 let searchtextbox = document.getElementById("searchtextbox");
 searchtextbox.addEventListener("input", function(){
     let trlist = document.querySelectorAll("tr");
     Array.from(trlist).forEach(function(item){
-        let searchedtext = item.getElementsByTagName("td")[0].innerText;
+        let searchedtext = item.getElementsByTagName("td")[2].innerText;
         let searchtextboxval = searchtextbox.value;
         let re = new RegExp(searchtextboxval, 'gi');
         if(searchedtext.match(re)){
@@ -415,12 +460,13 @@ searchtextbox.addEventListener("input", function(){
     })
 })
 
+//Search by Status
 document.getElementsByName('status').forEach(function(e) {
     e.addEventListener("click", function() {
          debugger;
              let trlist = document.querySelectorAll("tr");
             Array.from(trlist).forEach(function(item){
-                let completedstatustext = item.getElementsByTagName("td")[2].innerText;
+                let completedstatustext = item.getElementsByTagName("td")[3].innerText;
                 //console.log(completedstatustext);
                 let re = new RegExp(e.value, 'gi');
                 if(completedstatustext.match(re)){
@@ -433,12 +479,13 @@ document.getElementsByName('status').forEach(function(e) {
     });
 });
 
+// Search by category
 document.getElementsByName('category').forEach(function(e) {
     e.addEventListener("click", function() {
          debugger;
              let trlist = document.querySelectorAll("tr");
             Array.from(trlist).forEach(function(item){
-                let categorytext = item.getElementsByTagName("td")[4].innerText;
+                let categorytext = item.getElementsByTagName("td")[5].innerText;
                 //console.log(completedstatustext);
                 let re = new RegExp(e.value, 'gi');
                 if(categorytext.match(re)){
@@ -450,8 +497,6 @@ document.getElementsByName('category').forEach(function(e) {
             })
     });
 });
-
-
 
 function IsReminderYes() {
     debugger;
@@ -475,6 +520,9 @@ function IsReminderNo() {
       }
     
 }
+
+
+
          
            
 
