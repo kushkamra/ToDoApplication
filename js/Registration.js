@@ -8,13 +8,11 @@ function saveUser() {
     
     try {
         debugger;
-       let email =  document.getElementById("email").value.toLowerCase();
-
-        if(email == undefined || email == "") 
+       
+      
+        if( !validateFormData()) 
         {
-           document.getElementById("emailmsg").style.display = 'block';
-           document.getElementById("emailmsg").innerText = 'Email is required';
-           return false; 
+            return false ;   
         }
 
         if(validateEmail(email)) 
@@ -67,6 +65,49 @@ loadImage = function() {
     
 }
 
+function validateFormData() {
+    let email =  document.forms.regForm.email.value; 
+    let firstname =  document.forms.regForm.firstName.value; 
+    let lastname =  document.forms.regForm.lastName.value;
+    let password = document.forms.regForm.password.value;
+    let confirmpassword = document.forms.regForm.confirmPassword.value;
+     let result =  true ; 
+
+    if(email == undefined || email == "") 
+    {
+       result =  false;
+       document.getElementById("emailmsg").style.display = "block";
+    
+    }
+    if(firstname == undefined || firstname == "") 
+    {
+       result =  false;
+       document.getElementById("firstnamemsg").style.display = "block";
+     
+    }
+    if(lastname == undefined || lastname == "") 
+    {
+       result =  false;
+       document.getElementById("lastnamemsg").style.display = "block";
+     
+    }
+
+    if(password == undefined || password == "") 
+    {
+       result =  false;
+       document.getElementById("passwordmsg").style.display = "block";
+     
+    }
+    if(confirmpassword == undefined || confirmpassword == "") 
+    {
+       result =  false;
+       document.getElementById("confirmpasswordmsg").style.display = "block";
+     
+    }
+    return result; 
+
+
+}
 
 function validateEmail(emailId) 
 {
