@@ -124,9 +124,10 @@ function validateTaskInput() {
     var selectedText = addtaskdateinputval 
     var selectedDate = new Date(selectedText);
     var now = new Date();
-    if (selectedDate < now) {
+    
+    if (!(selectedDate.toDateString() >= now.toDateString())) {
         document.getElementById("taskDateError").style.display= "block"; 
-        document.getElementById("taskDateError").innerText = "Selected task date should not be Past Date"
+        document.getElementById("taskDateError").innerText = "Selected task date must be current and future Date only"
         result = false; 
     }
     else
@@ -166,6 +167,20 @@ function showtask(){
     }
     let html = '';
     let addedtasklist = document.getElementById("addedtasklist");
+    html += ` <thead class="thead-light">
+              <tr>
+             <th ></th>
+             <th scope="col">#</th>
+             <th scope="col">Task Name</th>
+             <th scope="col">Status</th>
+             <th scope="col">Date</th>
+             <th scope="col">Category</th>
+            <th colspan="3" scope="col"></th>
+            </tr> </thead>`;
+
+            if(taskObj.length > 0)
+            {
+                html += `<tbody>`
     taskObj.forEach((item, index) => {
 
         if(item.completeStatus==true){
@@ -177,7 +192,7 @@ function showtask(){
         }
         html += `<tr>
                     <td><input type="checkbox" value="${index}" name="task_checkbox" id="chkTask"/></td>
-                    <td scope="row">${index+1}</td>
+                    <td >${index+1}</td>
                     ${taskCompleteValue}
                     ${taskcompleteStatustext}
                     <td>${item.task_date}</td>
@@ -187,6 +202,12 @@ function showtask(){
                     <td><button type="button"  onclick="deleteitem(${index})" class="text-danger"><i class="fa fa-trash"></i>Delete</button></td>
                 </tr>`;
     });
+     html += `</tbody>`
+} else 
+{
+       html += `<tr> <td colspan="9"> Record not found <td></tr>`;
+}
+   
     addedtasklist.innerHTML = html;
 }
 
@@ -464,7 +485,7 @@ searchtextbox.addEventListener("input", function(){
 document.getElementsByName('status').forEach(function(e) {
     e.addEventListener("click", function() {
          debugger;
-             let trlist = document.querySelectorAll("tr");
+             let trlist = document.querySelectorAll("tbody tr");
             Array.from(trlist).forEach(function(item){
                 let completedstatustext = item.getElementsByTagName("td")[3].innerText;
                 //console.log(completedstatustext);
@@ -482,8 +503,10 @@ document.getElementsByName('status').forEach(function(e) {
 // Search by category
 document.getElementsByName('category').forEach(function(e) {
     e.addEventListener("click", function() {
-         debugger;
-             let trlist = document.querySelectorAll("tr");
+            debugger; 
+
+            let trlist = document.querySelectorAll("tbody tr");
+             
             Array.from(trlist).forEach(function(item){
                 let categorytext = item.getElementsByTagName("td")[5].innerText;
                 //console.log(completedstatustext);

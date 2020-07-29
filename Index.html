@@ -64,18 +64,18 @@
                 
                   <div class="form-row" style="margin-top: 10px;"> 
                     <div class="col-5 mr-sm-2"> 
-                      <input type="date" class="form-control" min="0" onchange="checkTaskDate()" placeholder="select date" id="addtaskdateinput"/> 
+                      <input type="date" class="form-control" min="0"  placeholder="select date" id="addtaskdateinput"/> 
                       <div id="taskDateError" class="invalid-feedback" >
                         Please select task date.
                      </div>
                     </div>
                      <div class="col-6 mr-sm-2">
                       <p>Please select your Category:</p>
-                      <input type="checkbox"  id="office" name="task_category" value="office">
+                      <input type="checkbox"  id="task_office" name="task_category" value="office">
                       <label for="office">Office</label>
-                      <input type="checkbox" id="home" name="task_category" value="home">
+                      <input type="checkbox" id="task_home" name="task_category" value="home">
                       <label for="home">Home</label>
-                      <input type="checkbox" id="personal" name="task_category" value="personal">
+                      <input type="checkbox" id="task_personal" name="task_category" value="personal">
                       <label for="personal">Personal</label>
                       <div id="taskCategoryError" class="invalid-feedback" >
                         Please select atleast on category. 
@@ -103,7 +103,7 @@
                     </div>
                   </div>
                 <div class="to-do-output">
-                  <table class="table table-striped mt-3 mb-0" id="addedtasklist">    
+                  <table class="table mt-3 mb-0" id="addedtasklist">    
                   </table>
                 </div>
               </div>
@@ -120,11 +120,11 @@
                     </div>
                     <div class="col-md-12">
                       <h5><b>Category:</b></h5>
-                      <input type="checkbox" id="office" name="category" value="office">
+                      <input type="checkbox" id="search_office" name="category" value="office">
                       <label for="office">Office</label><br>
-                      <input type="checkbox" id="home" name="category" value="home">
+                      <input type="checkbox" id="search_home" name="category" value="home">
                       <label for="home">Home</label><br>
-                      <input type="checkbox" id="personal" name="category" value="personal">
+                      <input type="checkbox" id="search_personal" name="category" value="personal">
                       <label for="personal">Personal</label>
                      </div>
                      <div class="col-md-12">
